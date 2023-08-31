@@ -15,6 +15,7 @@
 
 <body class="font-[inter]">
     <header >
+        <!-- Navigation Bar -->
         <nav class="flex justify-between items-center mx-10 my-10">
             <div>
                 <img src="./images/Logo.png" alt="Logo">
@@ -27,12 +28,30 @@
             </div>
         </nav>
         <hr class="mx-10">
+        <!-- Category Section -->
         <section id="category-container" class="flex justify-center gap-5 my-10">
-            <button class="bg-gray-300 px-4 py-2 font-medium rounded">Sort by view</button>
-            <button class="bg-gray-300 px-4 py-2 font-medium rounded">Sort by view</button>
         </section>
     </header>
     <main>
+        <!-- All Cards Added -->
+        <div id="card-container" class="card-container grid grid-cols-4">
+            <!-- Single card -->
+            <div class="card bg-base-100 shadow-xl">
+                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+                <div class="card-body">
+                  <h2 class="card-title">
+                    Shoes!
+                    <div class="badge badge-secondary">NEW</div>
+                  </h2>
+                  <p>If a dog chews shoes whose shoes does he choose?</p>
+                  <div class="card-actions justify-end">
+                    <div class="badge badge-outline">Fashion</div> 
+                    <div class="badge badge-outline">Products</div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
 
     </main>
     <footer>
