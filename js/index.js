@@ -19,7 +19,7 @@ const displayCategory = (fetchedCategories) => {
     });
 }
 
-// loading category wise contents, default parameter is ll
+// loading category wise contents, default parameter is all
 const loadCategoryContents = async (categoryId) => {
     const fetchCategoryContents = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const response = await fetchCategoryContents.json()
@@ -32,26 +32,34 @@ const loadCategoryContents = async (categoryId) => {
 const displayCategoryContents = (contents) => {
     const cardContainer = document.getElementById('card-container')
     cardContainer.textContent = ""
+    
     contents.forEach(content => {
+        console.log(content.authors[0].verified);
+        //const imageSrc = ;
         console.log(content);
         const div = document.createElement('div')
         div.innerHTML = `
-        <div class="card bg-base-100 shadow-xl">
-                <figure><img src="${content.thumbnail}" alt="Shoes" /></figure>
-                <div class="card-body">
-                  <h2 class="card-title">
-                  ${content.title}
-                    <div class="badge badge-secondary">NEW</div>
-                  </h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div class="card-actions justify-end">
-                    <div class="badge badge-outline">Fashion</div> 
-                    <div class="badge badge-outline">Products</div>
-                  </div>
+        <div class="single-card-container ">
+                <div class="image-container relative mb-5">
+                    <img class="rounded-lg h-40 w-full cover" src="${content.thumbnail}" alt="">
+                    <p id="time-duration" class="hidden absolute bottom-2 right-2 bg-black text-white rounded p-1">11hours 23mins</p>
                 </div>
-              </div>
+                <div class="card-description-container flex gap-3">
+                    <div class="profile-picture-container">
+                        <img class="rounded-full h-10 w-10 cover" src="${content.authors[0].profile_picture}" alt="">
+                    </div>
+                    <div >
+                        <h1 class="mb-2 font-bold">${content.title}</h1>
+                        <div id="verified-container" class="flex gap-2 mb-2">
+                            <p class="text-gray-500">${content.authors[0].profile_name}</p>
+                            <p>${content.authors[0]?.verified?'<img src="./js/verified.svg"></img>':''}</p>
+                        </div>
+                        <p class="text-gray-500">${content.others.views}</p>
+                    </div>
+    
+                </div>
+            </div>
         `
-
         cardContainer.appendChild(div)
     })
 
