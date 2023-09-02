@@ -79,13 +79,13 @@ const displayCategoryContents = (contents) => {
                     <div class="profile-picture-container">
                         <img class="rounded-full h-10 w-10 cover" src="${content.authors[0].profile_picture}" alt="">
                     </div>
-                    <div >
+                    <div class="text-left">
                         <h1 class="mb-2 font-bold">${content.title}</h1>
                         <div id="verified-container" class="flex gap-2 mb-2">
                             <p class="text-gray-500">${content.authors[0].profile_name}</p>
                             <p>${content.authors[0]?.verified ? '<img src="./js/verified.svg"></img>' : ''}</p>
                         </div>
-                        <p class="text-gray-500">${content.others.views}</p>
+                        <p class="text-gray-500">${content.others.views} views</p>
                     </div>
     
                 </div>
