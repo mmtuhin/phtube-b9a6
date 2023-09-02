@@ -11,14 +11,14 @@ loadCategory()
 
 // Displaying Category
 const displayCategory = (fetchedCategories) => {
-    const categoryContainer = document.getElementById('category-container')     
+    const categoryContainer = document.getElementById('category-container')
     fetchedCategories.forEach(category => {
-        
+
         const div = document.createElement('div')
         div.innerHTML = `
         <button id="${category.category_id}" onclick='loadCategoryContents(${category.category_id})' class="bg-gray-300 px-2 md:px-4 py-1 md:py-2 font-medium rounded hover:bg-[#003A61] hover:text-white  focus:bg-[#FF1F3D] focus:text-white">${category.category}</button>`
         categoryContainer.appendChild(div)
-             
+
     });
 }
 
@@ -26,12 +26,12 @@ const displayCategory = (fetchedCategories) => {
 const loadCategoryContents = async (categoryId) => {
     // Focus
     const btnFocused = document.getElementById(`${categoryId}`)
-        console.log(btnFocused);
-        btnFocused.focus()
+    //console.log(btnFocused);
+    btnFocused.focus()
 
-    const btnSortByView = document.getElementById('sort-by-view') 
-    console.log(categoryId);
-    btnSortByView.setAttribute('onclick',`sortByView(${categoryId})`)
+    const btnSortByView = document.getElementById('sort-by-view')
+    //console.log(categoryId);
+    btnSortByView.setAttribute('onclick', `sortByView(${categoryId})`)
     //console.log(btnSortByView);
     //console.log(categoryId);
     const fetchCategoryContents = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
@@ -52,7 +52,7 @@ const displayCategoryContents = (contents) => {
         <h1 class="m-auto text-xl md:text-3xl font-semibold">Opps! Sorry, There is no content here.</h1>
         `
         // imgDiv.classList.add('col-span-1 md:col-span-2 lg:col-span-4')
-        imgDiv.setAttribute('class','col-span-1 md:col-span-2 lg:col-span-4')
+        imgDiv.setAttribute('class', 'col-span-1 md:col-span-2 lg:col-span-4')
         console.log(imgDiv);
         cardContainer.appendChild(imgDiv)
     }
@@ -70,7 +70,7 @@ const displayCategoryContents = (contents) => {
         //console.log(time);
         const div = document.createElement('div')
         div.innerHTML = `
-        <div class="single-card-container ">
+        <div class="single-card-container mb-2">
                 <div class="image-container relative mb-5">
                     <img class="rounded-lg h-40 w-full cover" src="${content.thumbnail}" alt="">
                     <p id="time-container" class="absolute bottom-2 right-2 bg-black text-white rounded">${content.others.posted_date ? time : ''}</p>
@@ -80,8 +80,8 @@ const displayCategoryContents = (contents) => {
                         <img class="rounded-full h-10 w-10 cover" src="${content.authors[0].profile_picture}" alt="">
                     </div>
                     <div class="text-left">
-                        <h1 class="mb-2 font-bold">${content.title}</h1>
-                        <div id="verified-container" class="flex gap-2 mb-2">
+                        <h1 class="mb-1 font-bold">${content.title}</h1>
+                        <div id="verified-container" class="flex gap-2 mb-1 items-center">
                             <p class="text-gray-500">${content.authors[0].profile_name}</p>
                             <p>${content.authors[0]?.verified ? '<img src="./js/verified.svg"></img>' : ''}</p>
                         </div>
@@ -105,12 +105,12 @@ const sortByView = async (categoryId) => {
     // sortContent.forEach(content=>{
     //     console.log(content.others.views);
     // })
-    sortContent.sort(function(a,b){
+    sortContent.sort(function (a, b) {
         //console.log(parseFloat(a.others.views));
-        if(parseFloat(a.others.views)>parseFloat(b.others.views)){
+        if (parseFloat(a.others.views) > parseFloat(b.others.views)) {
             return -1
         }
-        else if(parseFloat(a.others.views)< parseFloat(b.others.views)){
+        else if (parseFloat(a.others.views) < parseFloat(b.others.views)) {
             return 1
         }
         else {
