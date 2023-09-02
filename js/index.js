@@ -58,8 +58,8 @@ const displayCategoryContents = (contents) => {
         let min = 0
         if (content.others.posted_date) {
             const timeStringToNumber = parseInt(content.others.posted_date)
-            hour = timeStringToNumber / 60
-            min = timeStringToNumber % 60
+            hour = timeStringToNumber / 3600
+            min = (timeStringToNumber % 3600) / 60
         }
         let time = parseInt(hour) + "hrs " + parseInt(min) + "min ago"
 
