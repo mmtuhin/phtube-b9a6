@@ -11,24 +11,26 @@ loadCategory()
 
 // Displaying Category
 const displayCategory = (fetchedCategories) => {
-    const categoryContainer = document.getElementById('category-container')
-    
-    
+    const categoryContainer = document.getElementById('category-container')     
     fetchedCategories.forEach(category => {
         
         const div = document.createElement('div')
         div.innerHTML = `
-        <button onclick='loadCategoryContents(${category.category_id})' class="bg-gray-300 px-2 md:px-4 py-1 md:py-2 font-medium rounded  focus:bg-[#FF1F3D] focus:text-white">${category.category}</button>`
+        <button id="${category.category_id}" onclick='loadCategoryContents(${category.category_id})' class="bg-gray-300 px-2 md:px-4 py-1 md:py-2 font-medium rounded hover:bg-[#003A61] hover:text-white  focus:bg-[#FF1F3D] focus:text-white">${category.category}</button>`
         categoryContainer.appendChild(div)
-        
+             
     });
 }
 
 // loading category wise contents, default parameter is all
 const loadCategoryContents = async (categoryId) => {
-    const btnSortByView = document.getElementById('sort-by-view')
-    
-    //console.log(categoryId);
+    // Focus
+    const btnFocused = document.getElementById(`${categoryId}`)
+        console.log(btnFocused);
+        btnFocused.focus()
+
+    const btnSortByView = document.getElementById('sort-by-view') 
+    console.log(categoryId);
     btnSortByView.setAttribute('onclick',`sortByView(${categoryId})`)
     //console.log(btnSortByView);
     //console.log(categoryId);
@@ -36,7 +38,6 @@ const loadCategoryContents = async (categoryId) => {
     const response = await fetchCategoryContents.json()
     //console.log(response.data);
     displayCategoryContents(response.data)
-    
 }
 
 //displaying Category Wise contents
@@ -47,8 +48,12 @@ const displayCategoryContents = (contents) => {
     if (contents.length == 0) {
         const imgDiv = document.createElement('div')
         imgDiv.innerHTML = `
-        <img class="cols-span-2" src="./images/Icon.png" alt="">
+        <img class="m-auto" src="./images/Icon.png" alt="">
+        <h1 class="m-auto text-xl md:text-3xl font-semibold">Opps! Sorry, There is no content here.</h1>
         `
+        // imgDiv.classList.add('col-span-1 md:col-span-2 lg:col-span-4')
+        imgDiv.setAttribute('class','col-span-1 md:col-span-2 lg:col-span-4')
+        console.log(imgDiv);
         cardContainer.appendChild(imgDiv)
     }
     contents.forEach(content => {
@@ -62,7 +67,6 @@ const displayCategoryContents = (contents) => {
             min = (timeStringToNumber % 3600) / 60
         }
         let time = parseInt(hour) + "hrs " + parseInt(min) + "min ago"
-
         //console.log(time);
         const div = document.createElement('div')
         div.innerHTML = `
@@ -87,7 +91,6 @@ const displayCategoryContents = (contents) => {
                 </div>
             </div>
         `
-
         cardContainer.appendChild(div)
         const setInvisible = document.getElementById('time-container')
     })
@@ -102,7 +105,6 @@ const sortByView = async (categoryId) => {
     // sortContent.forEach(content=>{
     //     console.log(content.others.views);
     // })
-    
     sortContent.sort(function(a,b){
         //console.log(parseFloat(a.others.views));
         if(parseFloat(a.others.views)>parseFloat(b.others.views)){
@@ -115,7 +117,6 @@ const sortByView = async (categoryId) => {
             return 0
         }
     })
-
     // sortContent.forEach(content=>{
     //     console.log(content.others.views);
     // })
